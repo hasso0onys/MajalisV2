@@ -1,0 +1,52 @@
+name,sheikh,city,lectureType,time,audience,womensAccommodation,liveStream,liveStreamUrl,capacity,specialty,location
+مجلس الإمام الحسين,الشيخ محمد الصفار,الشويكة,دينية,20:30,رجال,لا ينطبق,نعم,https://youtube.com/live/abc123,300,كلاهما,https://maps.google.com/place/qatif1
+مجلس سيد الشهداء,الشيخ أحمد الخباز,العوامية,دينية، اجتماعية,19:15,الجميع,نعم,نعم,https://youtube.com/live/def456,500,محاضرة,https://maps.google.com/place/awamiya1
+مجلس الزهراء للسيدات,الشيخة فاطمة الناصر,القديح,دينية، تربوية,21:15,نساء,لا ينطبق,لا,,200,كلاهما,https://maps.google.com/place/qudaih1
+مجلس الإمام زين العابدين,الشيخ علي السنان,صفوى,دينية,18:45,رجال,لا ينطبق,نعم,https://youtube.com/live/ghi789,250,نعي,https://maps.google.com/place/safwa1
+مجلس أهل البيت,الشيخ حسن الشيرازي,تاروت,دينية، علمية,10:30,رجال,لا ينطبق,لا,,180,محاضرة,https://maps.google.com/place/tarout1
+مجلس الحوراء زينب,الشيخة مريم القطيفية,الجش,دينية,20:45,نساء,لا ينطبق,نعم,https://youtube.com/live/jkl012,150,كلاهما,https://maps.google.com/place/jesh1
+مجلس الإمام الباقر,الشيخ يوسف الماحوزي,الماحوز,دينية، ثقافية,19:30,الجميع,نعم,نعم,https://youtube.com/live/mno345,400,محاضرة,https://maps.google.com/place/mahooz1
+مجلس سيدة نساء العالمين,الشيخة زينب الخطيب,الدبابية,دينية، تربوية,22:00,نساء,لا ينطبق,لا,,120,نعي,https://maps.google.com/place/dababiya1
+مجلس الإمام الصادق,الشيخ جعفر البحراني,أم الحمام,دينية,21:00,رجال,لا ينطبق,نعم,https://youtube.com/live/pqr678,280,كلاهما,https://maps.google.com/place/umhamam1
+مجلس الشهداء,الشيخ محمد الأحسائي,سيهات,دينية، اجتماعية,18:00,الجميع,نعم,لا,,350,نعي,https://maps.google.com/place/sihat1
+مجلس الإمام الكاظم,الشيخ علي الموسوي,الخويلدية,دينية,20:00,رجال,لا ينطبق,نعم,https://youtube.com/live/stu901,200,محاضرة,https://maps.google.com/place/khuwaylidiya1
+مجلس فاطمة المعصومة,الشيخة سكينة الغريفي,الغريفة,دينية، تربوية,19:45,نساء,لا ينطبق,نعم,https://youtube.com/live/vwx234,100,كلاهما,https://maps.google.com/place/gharifa1
+مجلس الإمام الرضا,الشيخ حسين الخنيزي,الخنيزي,دينية,09:15,رجال,لا ينطبق,لا,,220,نعي,https://maps.google.com/place/khunaizi1
+مجلس السيدة رقية,الشيخة فاطمة الدرازي,الدراز,دينية، اجتماعية,21:30,نساء,لا ينطبق,نعم,https://youtube.com/live/yza567,160,محاضرة,https://maps.google.com/place/daraz1
+مجلس الإمام الجواد,الشيخ أحمد الشاخوري,الشاخورة,دينية,18:30,الجميع,نعم,لا,,300,كلاهما,https://maps.google.com/place/shakhoura1
+مجلس كربلاء المقدسة,الشيخ محمد الدمستاني,دمستان,دينية، ثقافية,22:15,رجال,لا ينطبق,نعم,https://youtube.com/live/bcd890,180,نعي,https://maps.google.com/place/damstan1
+مجلس السيدة خديجة,الشيخة مريم البحراني,البحاري,دينية,11:00,نساء,لا ينطبق,لا,,140,محاضرة,https://maps.google.com/place/bahari1
+مجلس الإمام الهادي,الشيخ علي التوبلاني,التوبي,دينية,19:00,رجال,لا ينطبق,نعم,https://youtube.com/live/efg123,250,كلاهما,https://maps.google.com/place/tubi1
+مجلس الحسن المجتبى,الشيخ جعفر الربيعي,الربيعية,دينية، علمية,20:15,الجميع,نعم,نعم,https://youtube.com/live/hij456,320,محاضرة,https://maps.google.com/place/rubaiya1
+مجلس أم البنين,الشيخة زينب الراشد,راشد,دينية، تربوية,21:45,نساء,لا ينطبق,لا,,110,نعي,https://maps.google.com/place/rashid1
+مجلس الإمام العسكري,الشيخ حسن الأوجامي,الأوجام,دينية,18:15,رجال,لا ينطبق,نعم,https://youtube.com/live/klm789,200,كلاهما,https://maps.google.com/place/awjam1
+مجلس النور المحمدي,الشيخ يوسف القطيفي,القطيف المركز,دينية، اجتماعية,22:30,الجميع,نعم,نعم,https://youtube.com/live/nop012,450,محاضرة,https://maps.google.com/place/qatif_center1
+مجلس السيدة سكينة,الشيخة فاطمة العوامية,العوامية,دينية,20:30,نساء,لا ينطبق,نعم,https://youtube.com/live/qrs345,130,نعي,https://maps.google.com/place/awamiya2
+مجلس الإمام المهدي,الشيخ محمد الصنقور,الصنقور,دينية، ثقافية,14:30,رجال,لا ينطبق,لا,,190,كلاهما,https://maps.google.com/place/sanqour1
+مجلس الصديقة الطاهرة,الشيخة مريم الجارودية,الجارودية,دينية,19:30,نساء,لا ينطبق,نعم,https://youtube.com/live/tuv678,120,محاضرة,https://maps.google.com/place/jarudiya1
+مجلس الثقلين,الشيخ أحمد الناصر,الناصرة,دينية، علمية,21:30,الجميع,نعم,نعم,https://youtube.com/live/wxy901,280,كلاهما,https://maps.google.com/place/nasra1
+مجلس التقوى,الشيخ علي الحلواجي,الحلة,دينية,18:45,رجال,لا ينطبق,لا,,160,نعي,https://maps.google.com/place/halla1
+مجلس الطهارة,الشيخة زينب المالكي,المالكية,دينية، تربوية,22:00,نساء,لا ينطبق,نعم,https://youtube.com/live/zab234,100,محاضرة,https://maps.google.com/place/malkiya1
+مجلس الهداية,الشيخ حسين البوعلي,البوعلي,دينية,19:15,الجميع,نعم,لا,,350,كلاهما,https://maps.google.com/place/buali1
+مجلس الشفاعة,الشيخ جعفر الدويهي,الدويهيس,دينية، اجتماعية,09:45,رجال,لا ينطبق,نعم,https://youtube.com/live/cde567,210,نعي,https://maps.google.com/place/duwayhis1
+مجلس النبراس,الشيخة فاطمة القلاف,القلعة,دينية,20:45,نساء,لا ينطبق,نعم,https://youtube.com/live/fgh890,150,محاضرة,https://maps.google.com/place/qalaa1
+مجلس الأنوار,الشيخ محمد السنابسي,السنابس,دينية، ثقافية,21:15,الجميع,نعم,نعم,https://youtube.com/live/ijk123,300,كلاهما,https://maps.google.com/place/sanabis1
+مجلس المواساة,الشيخ علي الجفير,الجفير,دينية,18:30,رجال,لا ينطبق,لا,,180,نعي,https://maps.google.com/place/jufair1
+مجلس البركات,الشيخة مريم الخنجي,الخنجية,دينية، تربوية,22:15,نساء,لا ينطبق,نعم,https://youtube.com/live/lmn456,110,محاضرة,https://maps.google.com/place/khanjiya1
+مجلس المصطفى,الشيخ أحمد البستاني,البستان,دينية,19:45,الجميع,نعم,نعم,https://youtube.com/live/opq789,400,كلاهما,https://maps.google.com/place/bustan1
+مجلس الكوثر,الشيخ حسن المدني,المدينة,دينية، علمية,15:30,رجال,لا ينطبق,لا,,220,نعي,https://maps.google.com/place/madina1
+مجلس الرحمة,الشيخة زينب الزهراني,الزهراء,دينية,20:00,نساء,لا ينطبق,نعم,https://youtube.com/live/rst012,140,محاضرة,https://maps.google.com/place/zahra1
+مجلس الإخلاص,الشيخ يوسف العياش,العياش,دينية، اجتماعية,21:45,الجميع,نعم,لا,,260,كلاهما,https://maps.google.com/place/ayash1
+مجلس الصبر,الشيخ محمد الجبيلي,الجبيل,دينية,12:00,رجال,لا ينطبق,نعم,https://youtube.com/live/uvw345,190,نعي,https://maps.google.com/place/jubail1
+مجلس التسليم,الشيخة فاطمة الحداد,الحد,دينية، ثقافية,19:00,نساء,لا ينطبق,نعم,https://youtube.com/live/xyz678,120,محاضرة,https://maps.google.com/place/hadd1
+مجلس الوفاء,الشيخ علي المطيري,المطير,دينية,22:45,الجميع,نعم,نعم,https://youtube.com/live/abc901,320,كلاهما,https://maps.google.com/place/mutair1
+مجلس الأمل,الشيخ جعفر الكعبي,الكعبة,دينية، تربوية,18:00,رجال,لا ينطبق,لا,,170,نعي,https://maps.google.com/place/kaaba1
+مجلس العزاء,الشيخة مريم السيف,السيف,دينية,20:30,نساء,لا ينطبق,نعم,https://youtube.com/live/def234,130,محاضرة,https://maps.google.com/place/saif1
+مجلس المحبة,الشيخ حسين الفردان,الفردوس,دينية، اجتماعية,10:00,الجميع,نعم,نعم,https://youtube.com/live/ghi567,380,كلاهما,https://maps.google.com/place/firdaus1
+مجلس الإيمان,الشيخ أحمد البشير,البشيرة,دينية,21:00,رجال,لا ينطبق,لا,,200,نعي,https://maps.google.com/place/bashaira1
+مجلس الطمأنينة,الشيخة زينب الراضي,الراضية,دينية، علمية,19:30,نساء,لا ينطبق,نعم,https://youtube.com/live/jkl890,110,محاضرة,https://maps.google.com/place/radiya1
+مجلس السلام,الشيخ محمد النوري,النور,دينية,21:45,الجميع,نعم,نعم,https://youtube.com/live/mno123,290,كلاهما,https://maps.google.com/place/nour1
+مجلس الخير,الشيخ علي المباركي,المبارك,دينية، ثقافية,16:30,رجال,لا ينطبق,لا,,180,نعي,https://maps.google.com/place/mubarak1
+مجلس البشارة,الشيخة فاطمة الفاضل,الفاضلية,دينية,22:30,نساء,لا ينطبق,نعم,https://youtube.com/live/pqr456,140,محاضرة,https://maps.google.com/place/fadiliya1
+مجلس العدالة,الشيخ حسن القاضي,القضيبية,دينية، اجتماعية,18:15,الجميع,نعم,نعم,https://youtube.com/live/stu789,340,كلاهما,https://maps.google.com/place/qudaibiya1
+مجلس الحكمة,الشيخ يوسف الحكيم,الحكمة,دينية,20:15,رجال,لا ينطبق,لا,,160,نعي,https://maps.google.com/place/hikma1

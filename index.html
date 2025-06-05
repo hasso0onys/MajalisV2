@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>المجالس الحسينية - القطيف</title>
+	<style type="text/css">* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mosque-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 35px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .main-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .preferences-form {
+            display: none;
+            padding: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .single-option {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .option-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .option-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-color: #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .simple-range-slider {
+            margin: 20px 0;
+        }
+
+        .slider-track {
+            position: relative;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin: 30px 0;
+            cursor: pointer;
+        }
+
+        .slider-range {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #2E7D32);
+            border-radius: 3px;
+            left: 30%;
+            width: 40%;
+            transition: all 0.3s ease;
+        }
+
+        .slider-thumb {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #4CAF50;
+            border: 3px solid white;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: grab;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .slider-thumb:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-thumb:active {
+            cursor: grabbing;
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        #thumbMin {
+            left: 30%;
+        }
+
+        #thumbMax {
+            left: 70%;
+        }
+
+        .time-range-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .time-start, .time-end {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .time-separator {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+
+        .city-select {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            width: 100%;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .city-select option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .searching-screen {
+            display: none;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .loading-circle {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .searching-text {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .searching-subtitle {
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #2E7D32);
+            border-radius: 3px;
+            animation: progress 3s ease-in-out;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .results-screen {
+            display: none;
+            padding: 20px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .results-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .results-count {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .count-item {
+            text-align: center;
+        }
+
+        .count-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .count-number.live {
+            color: #f44336;
+        }
+
+        .count-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sort-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            flex: 1;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .sort-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .sort-btn.active {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-color: #4CAF50;
+        }
+
+        .majlis-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .majlis-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .majlis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .majlis-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .majlis-sheikh {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        .compatibility {
+            background: #4CAF50;
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .majlis-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .detail-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        .detail-tag.live {
+            background: #f44336;
+            animation: pulse 2s infinite;
+        }
+
+        .detail-tag.men {
+            background: #4CAF50;
+        }
+
+        .detail-tag.lecture {
+            background: #2196F3;
+        }
+
+        .detail-tag.religious {
+            background: #9C27B0;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+            }
+        }
+
+        .majlis-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .majlis-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .watch-btn {
+            background: rgba(244, 67, 54, 0.8);
+            color: white;
+        }
+
+        .watch-btn:hover {
+            background: rgba(244, 67, 54, 1);
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+        }
+
+        .details-btn {
+            background: rgba(76, 175, 80, 0.8);
+            color: white;
+        }
+
+        .details-btn:hover {
+            background: rgba(76, 175, 80, 1);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .location-btn {
+            background: rgba(33, 150, 243, 0.8);
+            color: white;
+        }
+
+        .location-btn:hover {
+            background: rgba(33, 150, 243, 1);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        /* نافذة تفاصيل المجلس */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2c2c54 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            padding: 0;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 24px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            color: white;
+        }
+
+        .modal-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        .modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            flex: 1 1 auto;
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: white;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .detail-value.highlight {
+            color: #4CAF50;
+        }
+
+        .detail-value.live-link {
+            color: #4CAF50;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .detail-value.live-link:hover {
+            color: #66BB6A;
+        }
+
+        .modal-actions {
+            padding: 20px 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .modal-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .modal-btn.live-btn {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .modal-btn.live-btn:hover {
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.3);
+        }
+
+        .modal-btn.location-btn {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .modal-btn.location-btn:hover {
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+        }
+
+
+
+        .womens-question {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* تحسينات للموبايل */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .main-card {
+                padding: 30px 20px;
+            }
+
+            .main-title {
+                font-size: 24px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-count {
+                gap: 15px;
+            }
+
+            .count-number {
+                font-size: 20px;
+            }
+
+            .majlis-actions {
+                flex-direction: column;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* رسائل التأكيد والتنبيه */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #4CAF50;
+        }
+
+        .notification.error {
+            background: #f44336;
+        }
+
+        .notification.info {
+            background: #2196F3;
+        }
+
+        /* مؤشر تحميل الموقع */
+        .location-loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+	</style>
+</head>
+<body dir="ltr">
+<div class="container"><!-- الشاشة الرئيسية -->
+<div class="screen" id="mainScreen">
+<div class="main-card">
+<div class="mosque-icon">🕌</div>
+
+<h1 class="main-title">المجالس الحسينية - القطيف</h1>
+
+<p class="main-subtitle">استعرض المجالس الحسينية في القطيف بناء على تفضيلاتك</p>
+<button class="start-btn" onclick="showPreferences()">ابدأ التصفية &larr;</button></div>
+</div>
+<!-- شاشة التفضيلات -->
+
+<div class="screen preferences-form" id="preferencesScreen">
+<div class="header"><button class="back-btn" onclick="showMain()">&larr;</button>
+
+<h2 style="font-size: 20px; font-weight: bold;">تفضيلاتك</h2>
+
+<div></div>
+</div>
+
+<div class="form-section">
+<h3 class="form-title">نوع المحاضرة</h3>
+
+<p class="form-subtitle">(يمكن اختيار أكثر من نوع)</p>
+
+<div class="options-grid" id="lectureTypes"><button class="option-btn" data-value="اجتماعية" onclick="toggleOption(this, 'lectureTypes')">اجتماعية</button><button class="option-btn" data-value="علمية" onclick="toggleOption(this, 'lectureTypes')">علمية</button><button class="option-btn" data-value="تربوية" onclick="toggleOption(this, 'lectureTypes')">تربوية</button><button class="option-btn" data-value="ثقافية" onclick="toggleOption(this, 'lectureTypes')">ثقافية</button></div>
+
+<div class="single-option"><button class="option-btn" data-value="دينية" onclick="toggleOption(this, 'lectureTypes')">دينية</button></div>
+</div>
+
+<div class="form-section">
+<h3 class="form-title">المهتم به</h3>
+
+<p class="form-subtitle">(يمكن اختيار أكثر من خيار)</p>
+
+<div class="options-grid" id="interests"><button class="option-btn" data-value="نعي" onclick="toggleOption(this, 'interests')">نعي</button><button class="option-btn" data-value="محاضرة" onclick="toggleOption(this, 'interests')">محاضرة</button></div>
+</div>
+
+<div class="form-section">
+<h3 class="form-title">فئة الحضور</h3>
+
+<p class="form-subtitle">(يمكن اختيار أكثر من خيار)</p>
+
+<div class="options-grid" id="audience"><button class="option-btn" data-value="رجال" onclick="toggleOption(this, 'audience')">رجال</button><button class="option-btn" data-value="نساء" onclick="toggleOption(this, 'audience')">نساء</button></div>
+
+<div class="womens-question" id="womensQuestion">
+<h4 class="form-title" style="font-size: 16px;">هل يوجد مكان للمعذورات؟</h4>
+
+<div class="options-grid"><button class="option-btn" data-value="نعم" onclick="toggleSingleOption(this, 'womensAccommodation')">نعم</button><button class="option-btn" data-value="لا" onclick="toggleSingleOption(this, 'womensAccommodation')">لا</button></div>
+</div>
+</div>
+
+<div class="form-section">
+<h3 class="form-title">البث المباشر</h3>
+
+<div class="single-option"><select class="city-select" id="liveStream" onchange="updateLiveStreamPreference()"><option value="">لا يوجد تفضيل</option><option value="لا يوجد بث مباشر">لا يوجد بث مباشر</option><option value="يوجد بث مباشر">يوجد بث مباشر</option> </select></div>
+</div>
+
+<div class="form-section">
+<h3 class="form-title">نطاق وقت المجلس المفضل</h3>
+
+<div class="simple-range-slider">
+<div class="slider-track">
+<div class="slider-range" id="sliderRange"></div>
+
+<div class="slider-thumb" id="thumbMin"></div>
+
+<div class="slider-thumb" id="thumbMax"></div>
+</div>
+
+<div class="time-range-display"><span class="time-end" id="timeEndDisplay">11:00 م</span> <span class="time-separator">&rarr;</span> <span class="time-start" id="timeStartDisplay">9:00 ص</span></div>
+</div>
+</div>
+
+<div class="form-section">
+<h3 class="form-title">الحي</h3>
+<select class="city-select" id="citySelect" onchange="updateCityPreference()"><option value="">جميع الأحياء</option> </select><button class="option-btn" id="locationBtn" onclick="getLocation()" style="margin-top: 10px;">📍 حدد موقعك لبحث ادق </button></div>
+<button class="search-btn" onclick="searchMajalis()">بحث عن المجالس</button></div>
+<!-- شاشة البحث -->
+
+<div class="screen searching-screen" id="searchingScreen">
+<div class="loading-circle"></div>
+
+<h2 class="searching-text">جارٍ البحث عن المجالس المطابقة</h2>
+
+<p class="searching-subtitle">لتفضيلاتك...</p>
+
+<div class="progress-bar">
+<div class="progress-fill"></div>
+</div>
+</div>
+<!-- شاشة النتائج -->
+
+<div class="screen results-screen" id="resultsScreen">
+<div class="header"><button class="back-btn" onclick="showPreferences()">&larr;</button>
+
+<h2 class="results-title">النتائج (<span id="resultsCount">0</span>)</h2>
+
+<div></div>
+</div>
+
+<div class="results-count">
+<div class="count-item">
+<div class="count-number" id="totalCount">0</div>
+
+<div class="count-label">إجمالي المجالس</div>
+</div>
+
+<div class="count-item">
+<div class="count-number live" id="liveCount">0</div>
+
+<div class="count-label">بث مباشر</div>
+</div>
+
+<div class="count-item">
+<div class="count-number" id="compatibilityCount">0</div>
+
+<div class="count-label">توافق عالي</div>
+</div>
+</div>
+
+<div class="sort-options"><button class="sort-btn active" id="sortByCompatibility" onclick="sortResults('compatibility')">🎯 الأعلى توافقًا</button><button class="sort-btn" id="sortByLocation" onclick="sortResults('location')">📍 الأقرب للموقع</button></div>
+
+<div id="resultsList"></div>
+</div>
+<!-- نافذة تفاصيل المجلس -->
+
+<div class="modal-overlay" id="detailsModal" onclick="closeModal(event)">
+<div class="modal-content" onclick="event.stopPropagation()">
+<div class="modal-header"><button class="close-modal" onclick="closeModal()">&times;</button>
+
+<h3 class="modal-title" id="modalTitle">مجلس الإمام الحسين</h3>
+
+<p class="modal-subtitle" id="modalSubtitle">الشيخ محمد الصفار</p>
+</div>
+
+<div class="modal-body" id="modalBody"><!-- سيتم ملء التفاصيل هنا بواسطة JavaScript --></div>
+
+<div class="modal-actions" id="modalActions"><!-- سيتم إضافة الأزرار هنا بواسطة JavaScript --></div>
+</div>
+</div>
+</div>
+<script>
+        // بيانات المجالس
+        let majalisData = [];
+
+        // متغيرات التفضيلات المحسنة
+        let selectedPreferences = {
+            lectureTypes: [],
+            interests: [],
+            audience: [],
+            womensAccommodation: "",
+            liveStream: "",
+            timeRangeStart: 540, // 9:00 ص
+            timeRangeEnd: 1380,   // 11:00 م
+            city: "",
+            userLocation: null
+        };
+
+        // متغيرات للتحكم في السلايدر
+        let isDragging = false;
+        let activeThumb = null;
+        let minTime = 540; // 9:00 ص
+        let maxTime = 1380; // 11:00 م
+        const minLimit = 540;  // 9:00 ص
+        const maxLimit = 1380; // 11:00 م
+
+        // وظائف التنقل بين الشاشات
+        function showMain() {
+            hideAllScreens();
+            document.getElementById('mainScreen').style.display = 'block';
+        }
+
+        function showPreferences() {
+            hideAllScreens();
+            document.getElementById('preferencesScreen').style.display = 'block';
+            updateCityOptions();
+        }
+
+        function showSearching() {
+            hideAllScreens();
+            document.getElementById('searchingScreen').style.display = 'block';
+        }
+
+        function showResults() {
+            hideAllScreens();
+            document.getElementById('resultsScreen').style.display = 'block';
+        }
+
+        function hideAllScreens() {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.style.display = 'none');
+        }
+
+        // وظائف التفضيلات المحسنة
+        function toggleOption(button, category) {
+            const value = button.getAttribute('data-value');
+            
+            if (button.classList.contains('selected')) {
+                button.classList.remove('selected');
+                selectedPreferences[category] = selectedPreferences[category].filter(item => item !== value);
+            } else {
+                button.classList.add('selected');
+                if (!selectedPreferences[category].includes(value)) {
+                    selectedPreferences[category].push(value);
+                }
+            }
+
+            // إظهار سؤال المعذورات عند اختيار النساء
+            if (category === 'audience') {
+                const womensQuestion = document.getElementById('womensQuestion');
+                if (selectedPreferences.audience.includes('نساء')) {
+                    womensQuestion.style.display = 'block';
+                } else {
+                    womensQuestion.style.display = 'none';
+                    selectedPreferences.womensAccommodation = "";
+                    const womensButtons = womensQuestion.querySelectorAll('.option-btn');
+                    womensButtons.forEach(btn => btn.classList.remove('selected'));
+                }
+            }
+        }
+
+        function toggleSingleOption(button, property) {
+            const value = button.getAttribute('data-value');
+            const siblings = button.parentElement.querySelectorAll('.option-btn');
+            
+            if (button.classList.contains('selected')) {
+                button.classList.remove('selected');
+                selectedPreferences[property] = "";
+            } else {
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+                selectedPreferences[property] = value;
+            }
+        }
+
+        function updateLiveStreamPreference() {
+            selectedPreferences.liveStream = document.getElementById('liveStream').value;
+        }
+
+        function updateCityPreference() {
+            selectedPreferences.city = document.getElementById('citySelect').value;
+        }
+
+        // إعداد السلايدر المحسن
+        function initializeSlider() {
+            const sliderTrack = document.querySelector('.slider-track');
+            const sliderRange = document.getElementById('sliderRange');
+            const thumbMin = document.getElementById('thumbMin');
+            const thumbMax = document.getElementById('thumbMax');
+            const timeStartDisplay = document.getElementById('timeStartDisplay');
+            const timeEndDisplay = document.getElementById('timeEndDisplay');
+            
+            function updateSliderVisual() {
+                const trackWidth = sliderTrack.offsetWidth;
+                const range = maxLimit - minLimit;
+                
+                // حساب مواضع المؤشرين
+                const minPercent = ((minTime - minLimit) / range) * 100;
+                const maxPercent = ((maxTime - minLimit) / range) * 100;
+                
+                // تحديث مواضع المؤشرين
+                thumbMin.style.left = minPercent + '%';
+                thumbMax.style.left = maxPercent + '%';
+                
+                // تحديث الشريط الأخضر
+                sliderRange.style.left = minPercent + '%';
+                sliderRange.style.width = (maxPercent - minPercent) + '%';
+                
+                // تحديث النصوص
+                timeStartDisplay.textContent = formatTime(minTime);
+                timeEndDisplay.textContent = formatTime(maxTime);
+                
+                // تحديث التفضيلات
+                selectedPreferences.timeRangeStart = minTime;
+                selectedPreferences.timeRangeEnd = maxTime;
+            }
+            
+            function getTimeFromPosition(x) {
+                const rect = sliderTrack.getBoundingClientRect();
+                const percent = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+                const time = minLimit + (percent * (maxLimit - minLimit));
+                return Math.max(minLimit, Math.min(maxLimit, Math.round(time / 15) * 15));
+            }
+            
+            // معالج بداية السحب للفأرة
+            function handleMouseDown(e, thumb) {
+                isDragging = true;
+                activeThumb = thumb;
+                e.preventDefault();
+                document.body.style.userSelect = 'none';
+            }
+            
+            // معالج بداية السحب للمس
+            function handleTouchStart(e, thumb) {
+                isDragging = true;
+                activeThumb = thumb;
+                e.preventDefault();
+            }
+            
+            // معالج الحركة
+            function handleMove(clientX) {
+                if (!isDragging) return;
+                
+                const newTime = getTimeFromPosition(clientX);
+                
+                if (activeThumb === 'min') {
+                    minTime = Math.min(newTime, maxTime - 60);
+                } else {
+                    maxTime = Math.max(newTime, minTime + 60);
+                }
+                
+                updateSliderVisual();
+            }
+            
+            // معالج انتهاء السحب
+            function handleEnd() {
+                isDragging = false;
+                activeThumb = null;
+                document.body.style.userSelect = '';
+            }
+            
+            // أحداث الفأرة
+            thumbMin.addEventListener('mousedown', (e) => handleMouseDown(e, 'min'));
+            thumbMax.addEventListener('mousedown', (e) => handleMouseDown(e, 'max'));
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    handleMove(e.clientX);
+                }
+            });
+            
+            document.addEventListener('mouseup', handleEnd);
+            
+            // أحداث اللمس
+            thumbMin.addEventListener('touchstart', (e) => handleTouchStart(e, 'min'));
+            thumbMax.addEventListener('touchstart', (e) => handleTouchStart(e, 'max'));
+            
+            document.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches.length > 0) {
+                    handleMove(e.touches[0].clientX);
+                }
+            });
+            
+            document.addEventListener('touchend', handleEnd);
+            
+            // النقر على المسار
+            sliderTrack.addEventListener('click', (e) => {
+                if (e.target === thumbMin || e.target === thumbMax || isDragging) return;
+                
+                const clickTime = getTimeFromPosition(e.clientX);
+                const minDist = Math.abs(clickTime - minTime);
+                const maxDist = Math.abs(clickTime - maxTime);
+                
+                if (minDist < maxDist) {
+                    minTime = Math.min(clickTime, maxTime - 60);
+                } else {
+                    maxTime = Math.max(clickTime, minTime + 60);
+                }
+                
+                updateSliderVisual();
+            });
+            
+            // تعيين القيم الافتراضية
+            updateSliderVisual();
+        }
+
+        // تنسيق الوقت المحسن
+        function formatTime(minutes) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            const period = hours < 12 ? 'ص' : 'م';
+            const displayHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+            return `${displayHours}:${mins.toString().padStart(2, '0')} ${period}`;
+        }
+
+        // عرض الرسائل المحسن
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // تحديد الموقع الجغرافي المحسن
+        function getLocation() {
+            const locationBtn = document.getElementById('locationBtn');
+            const originalText = locationBtn.innerHTML;
+            
+            locationBtn.innerHTML = '<span class="location-loading"></span>جارٍ تحديد الموقع...';
+            locationBtn.disabled = true;
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        selectedPreferences.userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        locationBtn.innerHTML = '✓ تم تحديد الموقع';
+                        locationBtn.disabled = false;
+                        showNotification('تم تحديد موقعك بنجاح!', 'success');
+                        
+                        setTimeout(() => {
+                            locationBtn.innerHTML = originalText;
+                        }, 2000);
+                    },
+                    function(error) {
+                        locationBtn.innerHTML = originalText;
+                        locationBtn.disabled = false;
+                        showNotification('لم يتمكن من الوصول للموقع. تأكد من السماح بالوصول للموقع.', 'error');
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 60000
+                    }
+                );
+            } else {
+                locationBtn.innerHTML = originalText;
+                locationBtn.disabled = false;
+                showNotification('المتصفح لا يدعم تحديد الموقع الجغرافي.', 'error');
+            }
+        }
+
+        // تحديث خيارات الأحياء
+        function updateCityOptions() {
+            const citySelect = document.getElementById('citySelect');
+            const cities = [...new Set(majalisData.map(majlis => majlis.city))].sort();
+            
+            // مسح الخيارات الحالية عدا "جميع الأحياء"
+            while (citySelect.children.length > 1) {
+                citySelect.removeChild(citySelect.lastChild);
+            }
+            
+            // إضافة الأحياء الجديدة
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
+
+        // البحث عن المجالس المحسن
+        function searchMajalis() {
+            // التحقق من وجود تفضيلات على الأقل
+            if (selectedPreferences.lectureTypes.length === 0 && 
+                selectedPreferences.interests.length === 0 && 
+                selectedPreferences.audience.length === 0 &&
+                !selectedPreferences.city &&
+                !selectedPreferences.liveStream) {
+                showNotification('الرجاء اختيار تفضيل واحد على الأقل', 'error');
+                return;
+            }
+            
+            showSearching();
+            
+            setTimeout(() => {
+                const results = filterMajalis();
+                displayResults(results);
+                showResults();
+            }, 3000);
+        }
+
+        // فلترة المجالس بناءً على المعايير الصارمة فقط
+        function filterMajalis() {
+            return majalisData.filter(majlis => {
+                // فئة الحضور
+                if (selectedPreferences.audience.length === 1) {
+                    const pref = selectedPreferences.audience[0];
+                    if (pref === 'نساء' && majlis.audience === 'رجال') return false;
+                    if (pref === 'رجال' && majlis.audience === 'نساء') return false;
+                }
+
+                // البث المباشر
+                if (selectedPreferences.liveStream) {
+                    if (selectedPreferences.liveStream === 'يوجد بث مباشر' && majlis.liveStream !== 'نعم') {
+                        return false;
+                    }
+                    if (selectedPreferences.liveStream === 'لا يوجد بث مباشر' && majlis.liveStream === 'نعم') {
+                        return false;
+                    }
+                }
+
+                // نطاق الوقت
+                if (!isTimeInRange(majlis.time, selectedPreferences.timeRangeStart, selectedPreferences.timeRangeEnd)) {
+                    return false;
+                }
+
+                return true;
+            });
+        }
+
+        // حساب نسبة التوافق بناءً على النقاط
+        function calculateCompatibility(majlis) {
+            let score = 0;
+            let total = 0;
+
+            // نوع المحاضرة
+            if (selectedPreferences.lectureTypes.length > 0) {
+                total += 3;
+                const majlisTypes = (majlis.lectureType || '')
+                    .split('،')
+                    .map(t => t.trim())
+                    .filter(t => t);
+                const sel = selectedPreferences.lectureTypes;
+                const fullMatch = sel.length === majlisTypes.length && sel.every(t => majlisTypes.includes(t)) && majlisTypes.every(t => sel.includes(t));
+                if (fullMatch) {
+                    score += 3;
+                } else if (sel.some(t => majlisTypes.includes(t))) {
+                    score += 2;
+                }
+            }
+
+            // الاهتمام
+            if (selectedPreferences.interests.length > 0) {
+                total += 3;
+                const sel = selectedPreferences.interests;
+                if ((sel.length === 2 && majlis.specialty === 'كلاهما') ||
+                    (sel.length === 1 && majlis.specialty === sel[0])) {
+                    score += 3;
+                } else if (sel.some(s => s === majlis.specialty) || majlis.specialty === 'كلاهما') {
+                    score += 2;
+                }
+            }
+
+            // مكان للمعذورات (للنساء فقط)
+            if (selectedPreferences.audience.includes('نساء') && selectedPreferences.womensAccommodation) {
+                total += 1;
+                if (majlis.womensAccommodation === selectedPreferences.womensAccommodation) {
+                    score += 1;
+                }
+            }
+
+            // الحي
+            if (selectedPreferences.city) {
+                total += 1;
+                if (majlis.city === selectedPreferences.city) {
+                    score += 1;
+                }
+            }
+
+            if (total === 0) return 100;
+            return Math.round((score / total) * 100);
+        }
+
+        // تحويل الوقت إلى دقائق
+        function convertTimeToMinutes(timeString) {
+            const [hours, minutes] = timeString.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+
+        // التحقق من البث المباشر الحالي
+        function isCurrentlyLive(majlis) {
+            if (majlis.liveStream !== 'نعم') return false;
+            
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            const majlisStartTime = convertTimeToMinutes(majlis.time);
+            const majlisEndTime = majlisStartTime + 120; // مدة المحاضرة ساعتان
+            
+            return currentTime >= majlisStartTime && currentTime <= majlisEndTime;
+        }
+
+        // التحقق من توافق الوقت مع النطاق المحدد
+        function isTimeInRange(majlisTime, startTime, endTime) {
+            const majlisMinutes = convertTimeToMinutes(majlisTime);
+            return majlisMinutes >= startTime && majlisMinutes <= endTime;
+        }
+
+        // عرض النتائج المحسن
+        function displayResults(results) {
+            // إضافة نسبة التوافق ومعلومات البث المباشر لكل نتيجة
+            results.forEach(majlis => {
+                majlis.compatibility = calculateCompatibility(majlis);
+                majlis.isLive = isCurrentlyLive(majlis);
+            });
+
+            // ترتيب حسب التوافق افتراضيًا
+            results.sort((a, b) => b.compatibility - a.compatibility);
+
+            // تحديث العدادات
+            document.getElementById('resultsCount').textContent = results.length;
+            document.getElementById('totalCount').textContent = results.length;
+            document.getElementById('liveCount').textContent = results.filter(m => m.isLive).length;
+            document.getElementById('compatibilityCount').textContent = results.filter(m => m.compatibility >= 80).length;
+
+            // عرض قائمة النتائج
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = '';
+
+            if (results.length === 0) {
+                resultsList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: rgba(255,255,255,0.7);">
+                        <div style="font-size: 48px; margin-bottom: 20px;">😔</div>
+                        <h3>لا توجد مجالس تطابق تفضيلاتك</h3>
+                        <p>جرب تعديل الفلاتر أو توسيع نطاق البحث</p>
+                    </div>
+                `;
+            } else {
+                results.forEach(majlis => {
+                    const card = createMajlisCard(majlis);
+                    resultsList.appendChild(card);
+                });
+            }
+
+            // حفظ النتائج للترتيب
+            window.currentResults = results;
+        }
+
+        // إنشاء بطاقة مجلس محسنة
+        function createMajlisCard(majlis) {
+            const card = document.createElement('div');
+            card.className = 'majlis-card';
+            
+            const liveTag = majlis.isLive ? '<span class="detail-tag live">LIVE 🔴</span>' : '';
+            const liveStreamTag = majlis.liveStream === 'نعم' ? '<span class="detail-tag">يتوفر بث مباشر</span>' : '';
+            const audienceTag = `<span class="detail-tag ${majlis.audience === 'رجال' ? 'men' : ''}">${majlis.audience}</span>`;
+            const typeTag = `<span class="detail-tag lecture">${majlis.lectureType}</span>`;
+            
+            let specialtyText = majlis.specialty;
+            if (majlis.specialty === 'كلاهما') {
+                specialtyText = 'محاضرة و نعي';
+            }
+            const specialtyTag = `<span class="detail-tag religious">${specialtyText}</span>`;
+            
+            const watchButton = majlis.isLive && majlis.liveStreamUrl ? 
+                `<button class="action-btn watch-btn" onclick="openLiveStream('${majlis.liveStreamUrl}')">🔴 مباشر</button>` : '';
+            
+            // تحديد لون نسبة التوافق
+            let compatibilityColor = '#f44336'; // أحمر
+            if (majlis.compatibility >= 80) compatibilityColor = '#4CAF50'; // أخضر
+            else if (majlis.compatibility >= 60) compatibilityColor = '#FF9800'; // برتقالي
+            
+            // تحديد تخطيط الأزرار بناءً على توفر البث المباشر
+            let actionButtons = '';
+            if (watchButton) {
+                actionButtons = `
+                    ${watchButton}
+                    <button class="action-btn location-btn" onclick="openLocation('${majlis.name}')">📍 موقع</button>
+                    <button class="action-btn details-btn" onclick="showMajlisDetails('${majlis.name}')">📋 تفاصيل</button>
+                `;
+            } else {
+                actionButtons = `
+                    <button class="action-btn location-btn" onclick="openLocation('${majlis.name}')">📍 الموقع</button>
+                    <button class="action-btn details-btn" onclick="showMajlisDetails('${majlis.name}')">📋 عرض التفاصيل</button>
+                `;
+            }
+            
+            card.innerHTML = `
+                <div class="majlis-header">
+                    <div>
+                        <div class="majlis-name">${majlis.name}</div>
+                        <div class="majlis-sheikh">${majlis.sheikh}</div>
+                    </div>
+                    <div class="compatibility" style="background: ${compatibilityColor}">${majlis.compatibility}%</div>
+                </div>
+                
+                <div class="majlis-details">
+                    ${liveTag}
+                    ${audienceTag}
+                    ${typeTag}
+                    ${specialtyTag}
+                    ${liveStreamTag}
+                </div>
+                
+                <div class="majlis-info">
+                    <span>📍 ${majlis.city}</span>
+                    <span>🕐 ${majlis.time}</span>
+                    <span>👥 ${majlis.capacity} شخص</span>
+                </div>
+                
+                <div class="majlis-actions">
+                    ${actionButtons}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // فتح البث المباشر
+        function openLiveStream(url) {
+            if (url) {
+                window.open(url, '_blank');
+            } else {
+                showNotification('رابط البث المباشر غير متوفر', 'error');
+            }
+        }
+
+                    // ترتيب النتائج المحسن
+        function sortResults(type) {
+            if (!window.currentResults) return;
+            
+            const compatibilityBtn = document.getElementById('sortByCompatibility');
+            const locationBtn = document.getElementById('sortByLocation');
+            
+            if (type === 'compatibility') {
+                window.currentResults.sort((a, b) => b.compatibility - a.compatibility);
+                compatibilityBtn.classList.add('active');
+                locationBtn.classList.remove('active');
+            } else if (type === 'location') {
+                if (selectedPreferences.userLocation) {
+                    // ترتيب حسب المسافة (محاكاة بسيطة)
+                    window.currentResults.sort((a, b) => {
+                        // هنا يمكن إضافة حساب المسافة الفعلية باستخدام coordinates
+                        return Math.random() - 0.5; // ترتيب عشوائي للمحاكاة
+                    });
+                } else {
+                    showNotification('الرجاء تحديد موقعك أولاً', 'error');
+                    return;
+                }
+                locationBtn.classList.add('active');
+                compatibilityBtn.classList.remove('active');
+            }
+            
+            // إعادة عرض النتائج
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = '';
+            window.currentResults.forEach(majlis => {
+                const card = createMajlisCard(majlis);
+                resultsList.appendChild(card);
+            });
+        }
+
+        // فتح الموقع الجغرافي
+        function openLocation(majlisName) {
+            const majlis = majalisData.find(m => m.name === majlisName);
+            if (majlis && majlis.location) {
+                window.open(majlis.location, "_blank");
+            } else if (majlis && majlis.city) {
+                const encodedCity = encodeURIComponent(majlis.city);
+                const googleMapsUrl = `https://www.google.com/maps/search/${encodedCity}`;
+                window.open(googleMapsUrl, "_blank");
+            }
+        }
+
+        // عرض تفاصيل المجلس المحسن في نافذة منبثقة
+        function showMajlisDetails(majlisName) {
+            const majlis = majalisData.find(m => m.name === majlisName);
+            if (!majlis) return;
+
+            // تحديث عنوان النافذة
+            document.getElementById('modalTitle').textContent = majlis.name;
+            document.getElementById('modalSubtitle').textContent = majlis.sheikh;
+
+            // إنشاء محتوى التفاصيل
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = '';
+
+            // قسم المعلومات الأساسية
+            const basicSection = document.createElement('div');
+            basicSection.className = 'detail-section';
+            basicSection.innerHTML = `
+                <div class="section-header">
+                    📋 معلومات أساسية
+                </div>
+            `;
+
+            const basicDetails = [
+                { label: 'النوع', value: majlis.lectureType },
+                { label: 'التخصص', value: majlis.specialty === 'كلاهما' ? 'محاضرة و نعي' : majlis.specialty },
+                { label: 'الفئة المستهدفة', value: majlis.audience }
+            ];
+
+            basicDetails.forEach(detail => {
+                const item = document.createElement('div');
+                item.className = 'detail-item';
+                item.innerHTML = `
+                    <span class="detail-label">${detail.label}:</span>
+                    <span class="detail-value">${detail.value}</span>
+                `;
+                basicSection.appendChild(item);
+            });
+
+            modalBody.appendChild(basicSection);
+
+            // قسم معلومات الوقت
+            const timeSection = document.createElement('div');
+            timeSection.className = 'detail-section';
+            timeSection.innerHTML = `
+                <div class="section-header">
+                    🕐 معلومات الوقت
+                </div>
+            `;
+
+            const timeDetails = [
+                { label: 'وقت البداية', value: majlis.time },
+                { label: 'المدة المتوقعة', value: 'ساعة واحدة' }
+            ];
+
+            timeDetails.forEach(detail => {
+                const item = document.createElement('div');
+                item.className = 'detail-item';
+                item.innerHTML = `
+                    <span class="detail-label">${detail.label}:</span>
+                    <span class="detail-value">${detail.value}</span>
+                `;
+                timeSection.appendChild(item);
+            });
+
+            modalBody.appendChild(timeSection);
+
+            // قسم معلومات المكان
+            const locationSection = document.createElement('div');
+            locationSection.className = 'detail-section';
+            locationSection.innerHTML = `
+                <div class="section-header">
+                    📍 معلومات المكان
+                </div>
+            `;
+
+            const locationDetails = [
+                { label: 'الحي', value: majlis.city },
+                { label: 'السعة', value: `${majlis.capacity} شخص` }
+            ];
+
+            locationDetails.forEach(detail => {
+                const item = document.createElement('div');
+                item.className = 'detail-item';
+                item.innerHTML = `
+                    <span class="detail-label">${detail.label}:</span>
+                    <span class="detail-value">${detail.value}</span>
+                `;
+                locationSection.appendChild(item);
+            });
+
+            modalBody.appendChild(locationSection);
+
+            // قسم البث المباشر
+            const streamSection = document.createElement('div');
+            streamSection.className = 'detail-section';
+            streamSection.innerHTML = `
+                <div class="section-header">
+                    📺 البث المباشر
+                </div>
+            `;
+
+            const streamDetails = [
+                { 
+                    label: 'متوفر', 
+                    value: majlis.liveStream,
+                    highlight: majlis.liveStream === 'نعم'
+                }
+            ];
+
+            if (majlis.liveStreamUrl) {
+                streamDetails.push({
+                    label: 'الرابط',
+                    value: 'فتح رابط',
+                    isLink: true,
+                    url: majlis.liveStreamUrl
+                });
+            }
+
+            streamDetails.forEach(detail => {
+                const item = document.createElement('div');
+                item.className = 'detail-item';
+                
+                let valueClass = 'detail-value';
+                if (detail.highlight) valueClass += ' highlight';
+                if (detail.isLink) valueClass += ' live-link';
+                
+                item.innerHTML = `
+                    <span class="detail-label">${detail.label}:</span>
+                    <span class="${valueClass}" ${detail.isLink ? `onclick="openLiveStream('${detail.url}')"` : ''}>${detail.value}</span>
+                `;
+                streamSection.appendChild(item);
+            });
+
+            modalBody.appendChild(streamSection);
+
+            // إنشاء أزرار العمليات
+            const modalActions = document.getElementById('modalActions');
+            modalActions.innerHTML = '';
+
+            // زر المشاركة (دائماً موجود)
+            const shareBtn = document.createElement('button');
+            shareBtn.className = 'modal-btn';
+            shareBtn.innerHTML = '📤 مشاركة معلومات المجلس';
+            shareBtn.onclick = () => shareMajlis(majlis);
+            modalActions.appendChild(shareBtn);
+
+            // زر البث المباشر إذا كان متوفراً ومباشر
+            if (majlis.isLive && majlis.liveStreamUrl) {
+                const liveBtn = document.createElement('button');
+                liveBtn.className = 'modal-btn live-btn';
+                liveBtn.innerHTML = '🔴 مشاهدة مباشرة';
+                liveBtn.onclick = () => openLiveStream(majlis.liveStreamUrl);
+                modalActions.appendChild(liveBtn);
+            }
+
+            // زر الموقع الجغرافي
+            const locationBtn = document.createElement('button');
+            locationBtn.className = 'modal-btn location-btn';
+            locationBtn.innerHTML = '📍 فتح الموقع في الخرائط';
+            locationBtn.onclick = () => openLocation(majlis.name);
+            modalActions.appendChild(locationBtn);
+
+            // عرض النافذة
+            document.getElementById('detailsModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // إغلاق النافذة المنبثقة
+        function closeModal(event) {
+            if (!event || event.target === document.getElementById('detailsModal')) {
+                document.getElementById('detailsModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // مشاركة تفاصيل المجلس
+        function shareMajlis(majlis) {
+            const shareText = `
+🕌 ${majlis.name}
+
+🎤 الشيخ: ${majlis.sheikh}
+🏙️ الحي: ${majlis.city}
+📍 الموقع: ${majlis.location || 'غير محدد'}
+📚 نوع المحاضرة: ${majlis.lectureType}
+🕐 الوقت: ${majlis.time}
+👥 الفئة: ${majlis.audience}
+🏛️ السعة: ${majlis.capacity} شخص
+📺 بث مباشر: ${majlis.liveStream}
+🎯 التخصص: ${majlis.specialty === 'كلاهما' ? 'محاضرة و نعي' : majlis.specialty}
+
+تطبيق المجالس الحسينية - القطيف
+            `.trim();
+
+            // محاولة استخدام Web Share API إذا كان متوفراً
+            if (navigator.share) {
+                navigator.share({
+                    title: `مجلس ${majlis.name}`,
+                    text: shareText,
+                    url: window.location.href
+                }).catch(error => {
+                    console.log('Error sharing:', error);
+                    fallbackShare(shareText);
+                });
+            } else {
+                fallbackShare(shareText);
+            }
+        }
+
+        // مشاركة احتياطية
+        function fallbackShare(text) {
+            // نسخ النص إلى الحافظة
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('تم نسخ تفاصيل المجلس إلى الحافظة', 'success');
+                }).catch(() => {
+                    // إذا فشل، استخدم الطريقة القديمة
+                    legacyCopyToClipboard(text);
+                });
+            } else {
+                legacyCopyToClipboard(text);
+            }
+        }
+
+        // نسخ النص بالطريقة القديمة
+        function legacyCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showNotification('تم نسخ تفاصيل المجلس إلى الحافظة', 'success');
+            } catch (err) {
+                showNotification('لم يتمكن من نسخ النص', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+
+
+        // الأحداث المحسنة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تهيئة السلايدر
+            initializeSlider();
+            
+            // تحديث خيارات الأحياء
+            updateCityOptions();
+            
+            // إضافة أحداث لوحة المفاتيح
+            document.addEventListener('keydown', function(e) {
+                // البحث بمفتاح Enter في شاشة التفضيلات
+                if (e.key === 'Enter' && document.getElementById('preferencesScreen').style.display === 'block') {
+                    searchMajalis();
+                }
+                
+                // إغلاق النافذة المنبثقة بمفتاح Escape
+                if (e.key === 'Escape' && document.getElementById('detailsModal').style.display === 'flex') {
+                    closeModal();
+                }
+            });
+
+            // تحسين تجربة المستخدم على الموبايل
+            if (window.innerWidth <= 480) {
+                document.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.style.fontSize = '14px';
+                    btn.style.padding = '10px 15px';
+                });
+            }
+
+            // إضافة مؤشر التحميل للبحث
+            const searchBtn = document.querySelector('.search-btn');
+            const originalSearchText = searchBtn.textContent;
+            
+            searchBtn.addEventListener('click', function() {
+                this.innerHTML = '<span class="location-loading"></span>جارٍ البحث...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    this.innerHTML = originalSearchText;
+                    this.disabled = false;
+                }, 3000);
+            });
+
+            // تحسين الأداء للسلايدر على الموبايل
+            if ('ontouchstart' in window) {
+                document.querySelectorAll('.slider-thumb').forEach(thumb => {
+                    thumb.style.width = '24px';
+                    thumb.style.height = '24px';
+                });
+            }
+
+            // حفظ التفضيلات في الذاكرة المحلية (اختياري)
+            function savePreferences() {
+                try {
+                    const prefsToSave = {
+                        ...selectedPreferences,
+                        userLocation: null // لا نحفظ الموقع لأسباب الخصوصية
+                    };
+                    localStorage.setItem('majalisPreferences', JSON.stringify(prefsToSave));
+                } catch (error) {
+                    // التجاهل في حالة عدم دعم localStorage
+                }
+            }
+
+            // تحميل التفضيلات المحفوظة (اختياري)
+            function loadPreferences() {
+                try {
+                    const saved = localStorage.getItem('majalisPreferences');
+                    if (saved) {
+                        const parsedPrefs = JSON.parse(saved);
+                        Object.assign(selectedPreferences, parsedPrefs);
+                        // تطبيق التفضيلات على الواجهة هنا إذا لزم الأمر
+                    }
+                } catch (error) {
+                    // التجاهل في حالة وجود خطأ
+                }
+            }
+
+            // تحميل التفضيلات المحفوظة عند بدء التطبيق
+            loadPreferences();
+
+            // حفظ التفضيلات عند تغييرها
+            window.savePreferences = savePreferences;
+        });
+
+        // إضافة معالج لحفظ التفضيلات عند التغيير
+        function updatePreferencesAndSave() {
+            if (typeof savePreferences === 'function') {
+                savePreferences();
+            }
+        }
+
+        // تحديث جميع دوال التفضيلات لحفظ التغييرات
+        const originalToggleOption = toggleOption;
+        toggleOption = function(button, category) {
+            originalToggleOption(button, category);
+            updatePreferencesAndSave();
+        };
+
+        const originalToggleSingleOption = toggleSingleOption;
+        toggleSingleOption = function(button, property) {
+            originalToggleSingleOption(button, property);
+            updatePreferencesAndSave();
+        };
+        
+        // ============ كود ربط البيانات مع لوحة التحكم ============
+// تحميل البيانات من لوحة التحكم
+function loadMajalisFromAdmin() {
+    fetch('get_majalis.php')
+        .then(r => {
+            if (!r.ok) throw new Error('Network response was not ok');
+            return r.json();
+        })
+        .then(data => {
+            majalisData = Array.isArray(data) ? data : [];
+            updateCityOptions();
+            console.log('تم جلب البيانات من CSV:', majalisData.length, 'مجلس');
+        })
+        .catch(err => {
+            console.error('خطأ في جلب البيانات:', err);
+            showNotification('لا يمكن جلب البيانات، يتطلب الأمر تشغيل الخادم الخلفي', 'error');
+        });
+}
+
+// استدعاء الدالة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    // تحميل البيانات من لوحة التحكم أولاً
+    loadMajalisFromAdmin();
+    
+    // باقي الكود الموجود مسبقاً...
+    // (الكود الموجود يبقى كما هو)
+});
+
+// مراقبة التغييرات من لوحة التحكم في الوقت الفعلي
+
+// إضافة رابط لوحة التحكم في الشاشة الرئيسية (اختياري)
+document.addEventListener('DOMContentLoaded', function() {
+    // إضافة زر صغير للوصول السريع للوحة التحكم (مخفي)
+    const adminButton = document.createElement('div');
+    adminButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 999;
+    `;
+    adminButton.innerHTML = '⚙️';
+    adminButton.title = 'لوحة التحكم';
+    
+    // إظهار الزر عند النقر 5 مرات في الزاوية اليسرى السفلى
+    let clickCount = 0;
+    document.addEventListener('click', function(e) {
+        if (e.clientX < 50 && e.clientY > window.innerHeight - 50) {
+            clickCount++;
+            if (clickCount >= 5) {
+                adminButton.style.opacity = '1';
+                setTimeout(() => {
+                    adminButton.style.opacity = '0';
+                    clickCount = 0;
+                }, 10000); // إخفاء بعد 10 ثواني
+            }
+        }
+    });
+    
+    adminButton.addEventListener('click', function() {
+        window.open('admin.html?admin=true', '_blank');
+    });
+    
+    document.body.appendChild(adminButton);
+});
+
+// تسجيل الزيارات للصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('count_visit.php').catch(() => {});
+});
+
+// ============ نهاية كود ربط البيانات ============
+    </script></body>
+</html>

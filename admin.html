@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - المجالس الحسينية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .admin-container {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-title {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .control-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .actions-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .action-btn.secondary {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .action-btn.secondary:hover {
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+        }
+
+        .action-btn.danger {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .action-btn.danger:hover {
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.3);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0,0,0,0.2);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: rgba(0,0,0,0.3);
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        tr:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .edit-btn, .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            color: #4CAF50;
+        }
+
+        .edit-btn:hover {
+            background: rgba(76, 175, 80, 0.2);
+        }
+
+        .delete-btn {
+            color: #f44336;
+        }
+
+        .delete-btn:hover {
+            background: rgba(244, 67, 54, 0.2);
+        }
+
+        .form-container {
+            display: none;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .form-input, .form-select {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .form-select option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .cancel-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 10px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .notification.info {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .file-input-wrapper {
+            display: none;
+        }
+
+        .search-box {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .actions-bar {
+                justify-content: center;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state-subtext {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- لوحة التحكم -->
+    <div id="adminContainer" class="admin-container" style="display: none;">
+        <div class="admin-header">
+            <h1 class="admin-title">
+                <span>🎛️</span>
+                لوحة التحكم - المجالس الحسينية
+            </h1>
+            <div></div>
+        </div>
+
+        <!-- بطاقات الإحصائيات -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMajalisCount">0</div>
+                <div class="stat-label">إجمالي المجالس</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalCitiesCount">0</div>
+                <div class="stat-label">عدد الأحياء</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="liveMajalisCount">0</div>
+                <div class="stat-label">مجالس بث مباشر</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="dailyVisits">0</div>
+                <div class="stat-label">زيارات اليوم</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalVisits">0</div>
+                <div class="stat-label">إجمالي الزيارات</div>
+            </div>
+        </div>
+
+        <!-- قسم إدارة المجالس -->
+        <div class="control-section">
+            <h2 class="section-title">
+                <span>📊</span>
+                إدارة المجالس
+            </h2>
+
+            <div class="actions-bar">
+                <button class="action-btn" id="addNewBtn">
+                    <span>➕</span>
+                    إضافة مجلس جديد
+                </button>
+                <button class="action-btn danger" id="clearBtn">
+                    <span>🗑️</span>
+                    مسح جميع البيانات
+                </button>
+            </div>
+
+            <input type="text" id="searchBox" class="search-box" placeholder="🔍 البحث في المجالس...">
+
+            <!-- نموذج إضافة/تعديل -->
+            <div id="formContainer" class="form-container">
+                <h3 id="formTitle" style="margin-bottom: 20px;">إضافة مجلس جديد</h3>
+                <form id="majlisForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">اسم المجلس*</label>
+                            <input type="text" id="majlisName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الشيخ/المحاضر*</label>
+                            <input type="text" id="sheikhName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الحي*</label>
+                            <input type="text" id="cityName" class="form-input" required list="citiesList">
+                            <datalist id="citiesList"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">نوع المحاضرة*</label>
+                            <select id="lectureType" class="form-select" multiple required>
+                                <option value="">اختر النوع</option>
+                                <option value="دينية">دينية</option>
+                                <option value="اجتماعية">اجتماعية</option>
+                                <option value="علمية">علمية</option>
+                                <option value="تربوية">تربوية</option>
+                                <option value="ثقافية">ثقافية</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الوقت*</label>
+                            <input type="time" id="majlisTime" class="form-input" required step="60" dir="ltr">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الفئة المستهدفة*</label>
+                            <select id="audience" class="form-select" required>
+                                <option value="">اختر الفئة</option>
+                                <option value="رجال">رجال</option>
+                                <option value="نساء">نساء</option>
+                                <option value="الجميع">الجميع</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">مكان للمعذورات</label>
+                            <select id="womensAccommodation" class="form-select">
+                                <option value="لا ينطبق">لا ينطبق</option>
+                                <option value="نعم">نعم</option>
+                                <option value="لا">لا</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">بث مباشر</label>
+                            <select id="liveStream" class="form-select">
+                                <option value="لا">لا</option>
+                                <option value="نعم">نعم</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رابط البث المباشر</label>
+                            <input type="url" id="liveStreamUrl" class="form-input" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">السعة*</label>
+                            <input type="number" id="capacity" class="form-input" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">التخصص*</label>
+                            <select id="specialty" class="form-select" required>
+                                <option value="">اختر التخصص</option>
+                                <option value="محاضرة">محاضرة</option>
+                                <option value="نعي">نعي</option>
+                                <option value="كلاهما">كلاهما</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الموقع</label>
+                            <input type="url" id="location" class="form-input" placeholder="https://maps.google.com/...">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelBtn">إلغاء</button>
+                        <button type="submit" class="save-btn">حفظ</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- جدول المجالس -->
+            <div class="table-container">
+                <table id="majalisTable">
+                    <thead>
+                        <tr>
+                            <th>اسم المجلس</th>
+                            <th>الشيخ</th>
+                            <th>الحي</th>
+                            <th>نوع المحاضرة</th>
+                            <th>الوقت</th>
+                            <th>الفئة</th>
+                            <th>معذورات</th>
+                            <th>بث مباشر</th>
+                            <th>السعة</th>
+                            <th>التخصص</th>
+                            <th>الموقع</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="majalisTableBody">
+                        <!-- سيتم ملؤها بواسطة JavaScript -->
+                    </tbody>
+                </table>
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <div class="empty-state-icon">📋</div>
+                    <div class="empty-state-text">لا توجد مجالس مضافة حتى الآن</div>
+                    <div class="empty-state-subtext">ابدأ بإضافة مجلس جديد أو استيراد البيانات من ملف CSV</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- عناصر مخفية -->
+
+    <script>
+        // بيانات المجالس
+        let majalisData = [];
+        let editingIndex = -1;
+        const ADMIN_PASSWORD = 'admin123';
+
+        // دالة عرض الإشعارات
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // دالة عرض لوحة التحكم
+        function showAdminPanel() {
+            document.getElementById('adminContainer').style.display = 'block';
+            updateTable();
+            updateStats();
+            updateCitiesDatalist();
+        }
+
+        // دالة تحميل البيانات
+        function loadData() {
+            fetch('get_majalis.php')
+                .then(r => {
+                    if (!r.ok) throw new Error('Network response was not ok');
+                    return r.json();
+                })
+                .then(data => {
+                    majalisData = Array.isArray(data) ? data : [];
+                    updateTable();
+                    updateStats();
+                    updateCitiesDatalist();
+                })
+                .catch(err => {
+                    majalisData = [];
+                    console.error('خطأ في جلب البيانات:', err);
+                    showNotification('يتطلب التطبيق تشغيل خادم PHP لعرض البيانات', 'error');
+                    updateStats();
+                });
+        }
+
+        function saveMajlisToServer(majlis) {
+            const formData = new FormData();
+            for (const key in majlis) {
+                formData.append(key, majlis[key]);
+            }
+            return fetch('save_majalis.php', {
+                method: 'POST',
+                body: formData
+            });
+        }
+        function updateMajalisOnServer() {
+            return fetch("update_majalis.php", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(majalisData)
+            });
+        }
+
+        function formatDisplayTime(timeStr) {
+            const parts = timeStr.split(":");
+            const h = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10);
+            const period = h < 12 ? "ص" : "م";
+            const displayHours = h % 12 || 12;
+            return `${displayHours}:${String(m).padStart(2, "0")} ${period}`;
+        }
+
+
+        // دالة عرض نموذج الإضافة
+        function showAddForm() {
+            editingIndex = -1;
+
+            document.getElementById('formTitle').textContent = 'إضافة مجلس جديد';
+            document.getElementById('majlisForm').reset();
+            document.getElementById('formContainer').style.display = 'block';
+            updateCitiesDatalist();
+        }
+
+        // دالة إخفاء النموذج
+        function hideForm() {
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('majlisForm').reset();
+            editingIndex = -1;
+        }
+
+        // دالة حفظ المجلس
+        function saveMajlis(event) {
+            event.preventDefault();
+            
+            const majlis = {
+                name: document.getElementById('majlisName').value,
+                sheikh: document.getElementById('sheikhName').value,
+                city: document.getElementById('cityName').value,
+                lectureType: Array.from(document.getElementById('lectureType').selectedOptions).map(o => o.value).join('، '),
+                time: document.getElementById('majlisTime').value,
+                audience: document.getElementById('audience').value,
+                womensAccommodation: document.getElementById('womensAccommodation').value,
+                liveStream: document.getElementById('liveStream').value,
+                liveStreamUrl: document.getElementById('liveStreamUrl').value,
+                capacity: parseInt(document.getElementById('capacity').value),
+                specialty: document.getElementById('specialty').value,
+                location: document.getElementById('location').value
+            };
+            
+            if (editingIndex === -1) {
+                majalisData.push(majlis);
+                saveMajlisToServer(majlis).then(() => {
+                    showNotification('تم إضافة المجلس بنجاح', 'success');
+                }).catch(() => {
+                    showNotification('حدث خطأ أثناء الحفظ', 'error');
+                });
+            } else {
+                majalisData[editingIndex] = majlis;
+                updateMajalisOnServer();
+                showNotification('تم تحديث بيانات المجلس بنجاح', 'success');
+            }
+            updateTable();
+            updateStats();
+            updateCitiesDatalist();
+            hideForm();
+        }
+
+        // دالة تعديل المجلس
+        function editMajlis(index) {
+            editingIndex = index;
+            const majlis = majalisData[index];
+            
+            document.getElementById('formTitle').textContent = 'تعديل بيانات المجلس';
+            document.getElementById('majlisName').value = majlis.name;
+            document.getElementById('sheikhName').value = majlis.sheikh;
+            document.getElementById('cityName').value = majlis.city;
+            const lectureSelect = document.getElementById('lectureType');
+            Array.from(lectureSelect.options).forEach(opt => {
+                opt.selected = majlis.lectureType.split('، ').includes(opt.value);
+            });
+            document.getElementById('majlisTime').value = majlis.time;
+            document.getElementById('audience').value = majlis.audience;
+            document.getElementById('womensAccommodation').value = majlis.womensAccommodation || 'لا ينطبق';
+            document.getElementById('liveStream').value = majlis.liveStream;
+            document.getElementById('liveStreamUrl').value = majlis.liveStreamUrl || '';
+            document.getElementById('capacity').value = majlis.capacity;
+            document.getElementById('specialty').value = majlis.specialty;
+            document.getElementById('location').value = majlis.location || '';
+            
+            document.getElementById('formContainer').style.display = 'block';
+        }
+
+        // دالة حذف المجلس
+        function deleteMajlis(index) {
+            if (confirm('هل أنت متأكد من حذف هذا المجلس؟')) {
+                majalisData.splice(index, 1);
+                updateTable();
+                updateStats();
+                updateMajalisOnServer();
+                updateCitiesDatalist();
+                showNotification('تم حذف المجلس بنجاح', 'success');
+            }
+        }
+
+        // دالة تحديث الجدول
+        function updateTable() {
+            const tbody = document.getElementById('majalisTableBody');
+            const emptyState = document.getElementById('emptyState');
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            
+            const filteredData = majalisData.filter(majlis => {
+                return majlis.name.toLowerCase().includes(searchTerm) ||
+                       majlis.sheikh.toLowerCase().includes(searchTerm) ||
+                       majlis.city.toLowerCase().includes(searchTerm) ||
+                       majlis.lectureType.toLowerCase().includes(searchTerm);
+            });
+            
+            tbody.innerHTML = '';
+            
+            if (filteredData.length === 0) {
+                emptyState.style.display = 'block';
+                document.getElementById('majalisTable').style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                document.getElementById('majalisTable').style.display = 'table';
+                
+                filteredData.forEach((majlis, index) => {
+                    const originalIndex = majalisData.indexOf(majlis);
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${majlis.name}</td>
+                        <td>${majlis.sheikh}</td>
+                        <td>${majlis.city}</td>
+                        <td>${majlis.lectureType}</td>
+                        <td>${formatDisplayTime(majlis.time)}</td>
+                        <td>${majlis.audience}</td>
+                        <td>${majlis.womensAccommodation || 'لا ينطبق'}</td>
+                        <td>${majlis.liveStream}</td>
+                        <td>${majlis.capacity}</td>
+                        <td>${majlis.specialty}</td>
+                        <td>
+                            ${majlis.location ? `<a href="${majlis.location}" target="_blank">عرض الموقع</a>` : '-'}
+                        </td>
+                        <td>
+                            <button class="edit-btn" onclick="editMajlis(${originalIndex})" title="تعديل">✏️</button>
+                            <button class="delete-btn" onclick="deleteMajlis(${originalIndex})" title="حذف">🗑️</button>
+                        </td>
+                    `;
+                    
+                    tbody.appendChild(row);
+                });
+            }
+        }
+
+        // دالة تحديث الإحصائيات
+        function updateStats() {
+            const totalMajalis = majalisData.length;
+            const cities = new Set(majalisData.map(m => m.city));
+            const liveMajalis = majalisData.filter(m => m.liveStream === 'نعم').length;
+
+            document.getElementById('totalMajalisCount').textContent = totalMajalis;
+            document.getElementById('totalCitiesCount').textContent = cities.size;
+            document.getElementById('liveMajalisCount').textContent = liveMajalis;
+
+            // جلب إحصائيات الزيارات
+            fetch('count_visit.php?mode=get')
+                .then(r => r.json())
+                .then(v => {
+                    document.getElementById('dailyVisits').textContent = v.daily || 0;
+                    document.getElementById('totalVisits').textContent = v.total || 0;
+                })
+                .catch(() => {
+                    document.getElementById('dailyVisits').textContent = '0';
+                    document.getElementById('totalVisits').textContent = '0';
+                });
+        }
+
+        // دالة تحديث قائمة الأحياء
+        function updateCitiesDatalist() {
+            const citiesList = document.getElementById('citiesList');
+            const cities = new Set(majalisData.map(m => m.city));
+            
+            citiesList.innerHTML = '';
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                citiesList.appendChild(option);
+            });
+        }
+
+
+        // دالة مسح جميع البيانات
+        function clearAllData() {
+            if (confirm('هل أنت متأكد من مسح جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.')) {
+                if (confirm('تأكيد نهائي: سيتم حذف جميع المجالس نهائياً!')) {
+                    majalisData = [];
+                    updateTable();
+                    updateStats();
+                    updateCitiesDatalist();
+                            updateMajalisOnServer();
+                    showNotification('تم مسح جميع البيانات', 'info');
+                }
+            }
+        }
+
+        // تهيئة التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // التحقق من معامل URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const adminParam = urlParams.get('admin');
+            
+            if (adminParam !== 'true') {
+                document.body.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; padding: 20px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px);">
+                            <h1 style="color: #f44336; margin-bottom: 20px;">⚠️ خطأ في الوصول</h1>
+                            <p style="font-size: 18px; margin-bottom: 30px;">لا يمكن الوصول إلى لوحة التحكم مباشرة</p>
+                            <p style="color: rgba(255,255,255,0.7);">استخدم الرابط الصحيح: <br><code style="background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 5px;">yoursite.com/admin.html?admin=true</code></p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // عرض لوحة التحكم مباشرة بدون كلمة مرور
+            showAdminPanel();
+
+            // تحميل البيانات المحفوظة
+            loadData();
+
+            // إضافة مستمعي الأحداث
+            document.getElementById('addNewBtn').addEventListener('click', showAddForm);
+            document.getElementById('clearBtn').addEventListener('click', clearAllData);
+            document.getElementById('cancelBtn').addEventListener('click', hideForm);
+            document.getElementById('majlisForm').addEventListener('submit', saveMajlis);
+            document.getElementById('searchBox').addEventListener('keyup', updateTable);
+
+            // مستمع لتحديث حالة رابط البث المباشر
+            document.getElementById('liveStream').addEventListener('change', function() {
+                const liveStreamUrl = document.getElementById('liveStreamUrl');
+                if (this.value === 'نعم') {
+                    liveStreamUrl.disabled = false;
+                } else {
+                    liveStreamUrl.disabled = true;
+                    liveStreamUrl.value = '';
+                }
+            });
+
+            // مستمع لتحديث حالة مكان المعذورات
+            document.getElementById('audience').addEventListener('change', function() {
+                const womensAccommodation = document.getElementById('womensAccommodation');
+                if (this.value === 'نساء' || this.value === 'الجميع') {
+                    womensAccommodation.disabled = false;
+                } else {
+                    womensAccommodation.disabled = true;
+                    womensAccommodation.value = 'لا ينطبق';
+                }
+            });
+
+            // مستمعي الأحداث للوحة المفاتيح
+            document.addEventListener('keydown', function(e) {
+                // Escape لإغلاق النموذج
+                if (e.key === 'Escape' && document.getElementById('formContainer').style.display === 'block') {
+                    hideForm();
+                }
+                
+                // Ctrl+N لإضافة مجلس جديد
+                if (e.ctrlKey && e.key === 'n') {
+                    e.preventDefault();
+                    showAddForm();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
