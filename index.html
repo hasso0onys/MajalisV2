@@ -1397,6 +1397,31 @@
             return majlisMinutes >= startTime && majlisMinutes <= endTime;
         }
 
+        // استخراج الإحداثيات من رابط خرائط جوجل إن توفرت
+        function extractCoordinates(url) {
+            if (!url) return null;
+            let match = url.match(/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+            if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+            match = url.match(/[?&](?:q|ll)=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+            if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+            match = url.match(/(?:search|place|dir)\/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+            if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+            return null;
+        }
+
+        // حساب المسافة باستخدام صيغة هافرسين
+        function haversineDistance(coord1, coord2) {
+            const R = 6371; // نصف قطر الأرض بالكيلومترات
+            const toRad = deg => deg * Math.PI / 180;
+            const dLat = toRad(coord2.lat - coord1.lat);
+            const dLon = toRad(coord2.lng - coord1.lng);
+            const lat1 = toRad(coord1.lat);
+            const lat2 = toRad(coord2.lat);
+            const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
         // عرض النتائج المحسن
         function displayResults(results) {
             // إضافة نسبة التوافق ومعلومات البث المباشر لكل نتيجة
@@ -1543,7 +1568,12 @@
 
             if (currentSort === 'location') {
                 if (selectedPreferences.userLocation) {
-                    results.sort(() => Math.random() - 0.5);
+                    results.forEach(m => {
+                        const coords = extractCoordinates(m.location);
+                        m._distance = coords ? haversineDistance(selectedPreferences.userLocation, coords) : Infinity;
+                    });
+                    results.sort((a, b) => a._distance - b._distance);
+                    results.forEach(m => delete m._distance);
                 } else {
                     currentSort = 'compatibility';
                     document.getElementById('sortByLocation').classList.remove('active');
