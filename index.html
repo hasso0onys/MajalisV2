@@ -1397,9 +1397,21 @@
             return majlisMinutes >= startTime && majlisMinutes <= endTime;
         }
 
-        // استخراج الإحداثيات من رابط خرائط جوجل إن توفرت
-        function extractCoordinates(url) {
+        // استخراج الإحداثيات من رابط خرائط جوجل، مع محاولة توسيع الروابط المختصرة
+        async function expandShortUrl(url) {
+            try {
+                const response = await fetch(url, { method: 'GET', redirect: 'follow' });
+                return response.url || url;
+            } catch (e) {
+                return url;
+            }
+        }
+
+        async function extractCoordinates(url) {
             if (!url) return null;
+            if (/^https?:\/\/(?:goo\.gl|maps\.app\.goo\.gl)/.test(url)) {
+                url = await expandShortUrl(url);
+            }
             let match = url.match(/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
             if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
             match = url.match(/[?&](?:q|ll)=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
@@ -1559,7 +1571,7 @@
             applyFiltersAndSort();
         }
 
-        function applyFiltersAndSort() {
+        async function applyFiltersAndSort() {
             let results = originalResults.slice();
 
             if (showOnlyLive) {
@@ -1568,10 +1580,10 @@
 
             if (currentSort === 'location') {
                 if (selectedPreferences.userLocation) {
-                    results.forEach(m => {
-                        const coords = extractCoordinates(m.location);
+                    for (const m of results) {
+                        const coords = await extractCoordinates(m.location);
                         m._distance = coords ? haversineDistance(selectedPreferences.userLocation, coords) : Infinity;
-                    });
+                    }
                     results.sort((a, b) => a._distance - b._distance);
                     results.forEach(m => delete m._distance);
                 } else {
