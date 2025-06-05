@@ -1397,8 +1397,48 @@
             return majlisMinutes >= startTime && majlisMinutes <= endTime;
         }
 
+        // استخراج الإحداثيات من رابط خرائط جوجل إن توفرت
+        function parseCoordinates(url) {
+            if (!url) return null;
+            let match = url.match(/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+            if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+            match = url.match(/[?&](?:q|ll)=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+            if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+            match = url.match(/(?:search|place|dir)\/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+            if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+            return null;
+        }
+
+        // محاولة فك روابط خرائط جوجل المختصرة ثم استخراج الإحداثيات منها
+        async function extractCoordinates(url) {
+            if (!url) return null;
+            if (/^https?:\/\/maps\.app\.goo\.gl\//.test(url)) {
+                try {
+                    const resp = await fetch(url, { method: 'GET', redirect: 'follow', mode: 'no-cors' });
+                    const finalUrl = resp.url || url;
+                    return parseCoordinates(finalUrl);
+                } catch (e) {
+                    return null;
+                }
+            }
+            return parseCoordinates(url);
+        }
+
+        // حساب المسافة باستخدام صيغة هافرسين
+        function haversineDistance(coord1, coord2) {
+            const R = 6371; // نصف قطر الأرض بالكيلومترات
+            const toRad = deg => deg * Math.PI / 180;
+            const dLat = toRad(coord2.lat - coord1.lat);
+            const dLon = toRad(coord2.lng - coord1.lng);
+            const lat1 = toRad(coord1.lat);
+            const lat2 = toRad(coord2.lat);
+            const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
         // عرض النتائج المحسن
-        function displayResults(results) {
+        async function displayResults(results) {
             // إضافة نسبة التوافق ومعلومات البث المباشر لكل نتيجة
             results.forEach(majlis => {
                 majlis.compatibility = calculateCompatibility(majlis);
@@ -1417,7 +1457,7 @@
             const liveBtn = document.getElementById('filterLiveNow');
             if (liveBtn) liveBtn.classList.remove('active');
 
-            applyFiltersAndSort();
+            await applyFiltersAndSort();
         }
 
         // إنشاء بطاقة مجلس محسنة
@@ -1500,7 +1540,7 @@
         }
 
                     // ترتيب النتائج المحسن
-        function sortResults(type) {
+        async function sortResults(type) {
             if (!originalResults.length) return;
 
             currentSort = type;
@@ -1520,10 +1560,10 @@
                 compatibilityBtn.classList.remove('active');
             }
 
-            applyFiltersAndSort();
+            await applyFiltersAndSort();
         }
 
-        function toggleLiveFilter() {
+        async function toggleLiveFilter() {
             showOnlyLive = !showOnlyLive;
             const liveBtn = document.getElementById('filterLiveNow');
             if (showOnlyLive) {
@@ -1531,10 +1571,10 @@
             } else {
                 liveBtn.classList.remove('active');
             }
-            applyFiltersAndSort();
+            await applyFiltersAndSort();
         }
 
-        function applyFiltersAndSort() {
+        async function applyFiltersAndSort() {
             let results = originalResults.slice();
 
             if (showOnlyLive) {
@@ -1543,7 +1583,12 @@
 
             if (currentSort === 'location') {
                 if (selectedPreferences.userLocation) {
-                    results.sort(() => Math.random() - 0.5);
+                    await Promise.all(results.map(async m => {
+                        const coords = await extractCoordinates(m.location);
+                        m._distance = coords ? haversineDistance(selectedPreferences.userLocation, coords) : Infinity;
+                    }));
+                    results.sort((a, b) => a._distance - b._distance);
+                    results.forEach(m => delete m._distance);
                 } else {
                     currentSort = 'compatibility';
                     document.getElementById('sortByLocation').classList.remove('active');
